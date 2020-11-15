@@ -2,7 +2,7 @@
     "products": [
         {
             "_id" : 1,
-            "image" : "/image/dress1.png",
+            "image" : "/image/dress1.jpg",
             "title" : "This is Title 1",
             "description" : "This is Tes 1",
             "availableSize" : ["M","XL","L"],
@@ -10,7 +10,7 @@
         },
         {
             "_id" : 2,
-            "image" : "/image/dress1.png",
+            "image" : "/image/dress2.jpg",
             "title" : "This is Title 2",
             "description" : "This is Test 2",
             "availableSize" : ["M","XL","L"],
@@ -18,7 +18,7 @@
         },
         {
             "_id" : 3,
-            "image" : "/image/dress1.png",
+            "image" : "/image/dress3.jpg",
             "title" : "This is Title 3",
             "description" : "This is Test 3",
             "availableSize" : ["M","XL","L"],
@@ -26,7 +26,7 @@
         },
         {
             "_id" : 4,
-            "image" : "/image/dress1.png",
+            "image" : "/image/dress4.jpg",
             "title" : "This is Title 4",
             "description" : "This is Test 4",
             "availableSize" : ["M","XL","L"],
@@ -34,7 +34,7 @@
         },
         {
             "_id" : 5,
-            "image" : "/image/dress1.png",
+            "image" : "/image/dress5.jpg",
             "title" : "This is Title 5",
             "description" : "This is Test 5",
             "availableSize" : ["M","XL","L"],

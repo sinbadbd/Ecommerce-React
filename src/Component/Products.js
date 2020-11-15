@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 // import formateCurrent from "../Utils";
-
+import ProductDetails from '../Component/ProductDetails'
 class Products extends Component {
     render(){
         return (
@@ -10,8 +10,8 @@ class Products extends Component {
                     //    console.log(product) 
                         
                         <div className="col-lg-4 pb-4" key={product._id}>
-                            <a href={"#" + product._id} className="border d-block"> 
-                                <img src="..." className="card-img-top" alt="..."></img>
+                            <a href={"/ProductDetails" + product._id} className="border d-block"> 
+                                <img src={product.image} className="card-img-top" alt="..."></img>
                                 <div className="card-body p-3">
                                     <h5 className="card-title mb-1">{product.title}</h5>
                                     <p className="card-text mb-1">{product.description}</p>
