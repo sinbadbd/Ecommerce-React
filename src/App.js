@@ -2,6 +2,7 @@ import React from "react"
 // import './App.css';
 import data from '../src/data.json';
 import Products from '../src/Component/Products';
+import Filter from "./Component/Filter";
  class App extends React.Component {
 
 
@@ -12,6 +13,24 @@ import Products from '../src/Component/Products';
             size : "",
             sort : "",
         };
+    }
+
+    filterProducts = (event) => {
+        console.log(event.target.value);
+        if (event.target.value === ""){
+            this.setState ({size: event, product: data.products});
+        }else {
+            this.setState ({
+                size : event.target.value,
+                products: data.products.filter(
+                    (product) => product.availableSize.indexOf(event.target.value) >= 0
+                  ),
+            });
+        }
+    }
+    sortProducts = (event) => {
+        console.log(event.target.value);
+    
     }
 
      render() {
@@ -34,6 +53,16 @@ import Products from '../src/Component/Products';
                     <div className="row">
                         <div className="col-lg-9">
                             <h4>Product List</h4>
+                            <div className="filter">
+                                <Filter 
+                                    count={this.state.products.length}
+                                    size = {this.state.size}
+                                    sort = {this.state.sort}
+                                    filterProducts = {this.filterProducts}
+                                    sortProducts   = {this.sortProducts}
+                                > 
+                                </Filter>
+                            </div>
                             <Products products={this.state.products}></Products>
                         </div>
                         <div className="col-lg-3">
