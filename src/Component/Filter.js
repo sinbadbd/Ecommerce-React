@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import {Row, coloumn} from 'react-bootstrap'
+import {Row, Col} from 'react-bootstrap'
 class Filter extends Component {
     render(){
         return (
@@ -13,8 +13,8 @@ class Filter extends Component {
                 <Col md={5}>
                 <select className="custom-select" value={this.props.sort} onChange={this.props.sortProducts}>
                         <option className >Open this select menu</option>
-                        <option value="1">Lowest Price</option>
-                        <option value="2">Highest Price</option>
+                        <option value="lowest">Lowest Price</option>
+                        <option value="highest">Highest Price</option>
                     </select>
                 </Col>
                 <Col md={5}>
