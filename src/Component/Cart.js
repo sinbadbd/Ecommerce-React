@@ -9,7 +9,7 @@ export class Cart extends Component {
                 {
                     cartItems.length === 0 ? 
                     (<div className="card-header">Cart is Empty</div> ): 
-                    (<div className="bg-success">You have {cartItems.length}</div>)
+                    (<div className="card-header">You have {cartItems.length}</div>)
                 }
                 <div> 
                     <ul className="list-unstyled">
@@ -25,6 +25,15 @@ export class Cart extends Component {
                         ))}
                     </ul>  
                 </div>
+
+                {
+                    cartItems.length > 0 ? 
+                        (<div className="cartTotal">
+                            <p> Total: ${cartItems.reduce((a,c) => a+c.price*c.count,0)}</p>
+                            <button className="btn btn-success">Procced</button>
+                        </div>) 
+                    : ""
+                }
 
             </div>
         )
