@@ -3,6 +3,7 @@ import React from "react"
 import data from '../src/data.json';
 import Products from '../src/Component/Products';
 import Filter from "./Component/Filter";
+import Cart from "./Component/Cart";
  class App extends React.Component {
 
 
@@ -10,6 +11,7 @@ import Filter from "./Component/Filter";
         super();
         this.state = {
             products : data.products,
+            cartItems: [],
             size : "",
             sort : "",
         };
@@ -42,6 +44,30 @@ import Filter from "./Component/Filter";
     
     }
 
+    addToCart = (product) => {
+        // console.log(product.price)
+        const cartItems = this.state.cartItems.slice();
+        let alreadyInCart = false;
+        cartItems.forEach((item) => {
+            if(item._id === product._id){
+                item.count++;
+                alreadyInCart = true;
+            }
+        });
+        if(!alreadyInCart){
+            cartItems.push({...product, count: 1});
+        }
+        this.setState({cartItems}) // update carts item
+    }
+
+
+    removeFromCart = (product) => {
+        const cartItems = this.state.cartItems.slice()
+        this.setState({
+            cartItems: cartItems.filter((x) => x._id !== product._id),
+        })
+    }
+
      render() {
         return ( 
             <div className="container-fluid">
@@ -72,10 +98,10 @@ import Filter from "./Component/Filter";
                                 > 
                                 </Filter>
                             </div>
-                            <Products products={this.state.products}></Products>
+                            <Products products={this.state.products} addToCart={this.addToCart}></Products>
                         </div>
                         <div className="col-lg-3">
-        
+                            <Cart cartItems={this.state.cartItems} removeFromCart={this.removeFromCart}/>
                         </div>
                     </div>
                 </div>
