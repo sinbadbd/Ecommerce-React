@@ -1,6 +1,31 @@
 import React, { Component } from 'react'
 
 export class Cart extends Component {
+
+    constructor(props){
+        super(props)
+        this.state = { 
+            name: "",
+            email: "",
+            address:"",
+            showCheckout : false 
+        };
+    }
+
+    handleInput = (e) => {
+        this.setState({[e.target.name]:e.target.value});
+    }
+    createOrder = (e) => {
+        e.preventDefault();
+        const order = {
+            name: this.state.name,
+            email: this.state.email,
+            address: this.state.address,
+            cartItems: this.props.cartItems
+        }
+        this.props.createOrder(order);
+    }
+
     render() {
         const { cartItems } = this.props;
 
@@ -27,14 +52,54 @@ export class Cart extends Component {
                 </div>
 
                 {
-                    cartItems.length > 0 ? 
-                        (<div className="cartTotal">
-                            <p> Total: ${cartItems.reduce((a,c) => a+c.price*c.count,0)}</p>
-                            <button className="btn btn-success">Procced</button>
-                        </div>) 
-                    : ""
-                }
+                    // cartItems.length > 0 ? 
+                    //     (<div className="cartTotal">
+                    //         <p> Total: ${cartItems.reduce((a,c) => a+c.price*c.count,0)}</p>
+                    //         <button className="btn btn-success">Procced</button>
+                    //     </div>) 
+                    // : ""
 
+                    cartItems.length !== 0 && (
+                        <div className="cartTotal">
+                            <p> Total: ${cartItems.reduce((a,c) => a+c.price*c.count,0)}</p>
+                            <button onClick = { ()=> {
+                                this.setState({showCheckout: true});
+                            }} className="btn btn-success">Procced</button>
+                        </div>
+                    )
+                       
+                    
+
+                    }
+
+                    <div>
+                        {this.state.showCheckout && (
+                            <div>
+
+                                <form onSubmit={this.createOrder}>
+                                    <div className="form-row">
+                                        <div className="form-group col-md-12">
+                                            <label>Name</label>
+                                            <input type="text" name="name" className="form-control" required onChange={this.handleInput}></input>
+                                        </div>  
+                                    </div>
+                                    <div className="form-row">
+                                        <div className="form-group col-md-12">
+                                            <label>Email</label>
+                                            <input type="email" name="email" className="form-control" required onChange={this.handleInput}></input>
+                                        </div>  
+                                    </div>
+                                    <div className="form-row">
+                                        <div className="form-group col-md-12">
+                                            <label>Address</label>
+                                            <input type="text" name="address" className="form-control" required onChange={this.handleInput}></input>
+                                        </div>  
+                                    </div>
+                                    <button type="submit" className="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                        )}
+                    </div>
             </div>
         )
     }

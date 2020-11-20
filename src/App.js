@@ -11,7 +11,7 @@ import Cart from "./Component/Cart";
         super();
         this.state = {
             products : data.products,
-            cartItems: [],
+            cartItems: localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [],
             size : "",
             sort : "",
         };
@@ -58,6 +58,7 @@ import Cart from "./Component/Cart";
             cartItems.push({...product, count: 1});
         }
         this.setState({cartItems}) // update carts item
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
     }
 
 
@@ -66,6 +67,12 @@ import Cart from "./Component/Cart";
         this.setState({
             cartItems: cartItems.filter((x) => x._id !== product._id),
         })
+        localStorage.setItem("cartItems", JSON.stringify(cartItems.filter((x) => x._id !== product._id)));
+    
+    }
+
+    createOrder = (order) => {
+        alert('order name', order)
     }
 
      render() {
@@ -101,7 +108,11 @@ import Cart from "./Component/Cart";
                             <Products products={this.state.products} addToCart={this.addToCart}></Products>
                         </div>
                         <div className="col-lg-3">
-                            <Cart cartItems={this.state.cartItems} removeFromCart={this.removeFromCart}/>
+                            <Cart 
+                                cartItems={this.state.cartItems} 
+                                removeFromCart={this.removeFromCart}
+                                createOrder={this.createOrder}
+                            />
                         </div>
                     </div>
                 </div>
